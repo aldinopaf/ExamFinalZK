@@ -1,0 +1,39 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="BilAddress" border="normal" 
+	apply="org.zkoss.bind.BindComposer" 
+	viewModel="@id('vm') @init('vmd.BilAddressVmd')">
+	
+	<hlayout>
+		<button label="add" onClick="@command('add')" />
+		<button label="edit" onClick="@command('edit')" />
+		<button label="delete" onClick="@command('delete')" />
+	</hlayout>
+
+		<div style="text-align:right">
+			<label value="Search By Name" />
+			<textbox value="@bind(vm.search)" onOK="@command('search')" />
+			<button label="Search" onClick="@command('search')" />
+		</div>	
+
+	<space />
+
+	<listbox model="@load(vm.listBilAddress)" selectedItem="@bind(vm.mstBilAddressDto)">
+		<listhead>
+			<listheader label="Bil Address Code" sort="auto" />
+			<listheader label="Name" sort="auto" />
+			<listheader label="Gender" sort="auto" />
+			<listheader label="Jobs" sort="auto" />
+		</listhead>
+		<template name="model">
+			<listitem>
+				<listcell label="@load(each.id)" />
+				<listcell label="@load(each.addressName)" />
+				<listcell label="@load(each.gender)" />
+				<listcell label="@load(each.job)" />
+			</listitem>
+		</template>
+	</listbox>
+	
+</window>
+</zk>

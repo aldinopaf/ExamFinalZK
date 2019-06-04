@@ -1,0 +1,22 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd"?>
+<zk>
+<window title="masuk" border="normal" apply="org.zkoss.bind.BindComposer"
+viewModel="@id('vm') @init('vmd.LogoutVmd')">
+<grid>
+	<columns>
+		<column width="100px" />
+		<column width="150px" />
+	</columns>
+	<rows>
+<!-- 		<row> -->
+<!-- 			welcome,  -->
+<!-- 			<label value="${sessionScope.user.namaKaryawan}"/> -->
+<!-- 		</row> -->
+		<row>
+			<button label="logout" onClick="@command('logout')"/>
+		</row>
+	</rows>
+</grid>
+</window>
+</zk>

@@ -1,0 +1,15 @@
+<div hflex="1" vflex="1" sclass="banner" width="100%">
+	<hbox hflex="1" vflex="1"  >
+		<a href="http://www.zkoss.org/">
+			<image src="/assets/imgs/zklogo.png" width="90px"/>
+		</a>
+		<div>
+			<label value="contoh project" sclass="banner-head"/>
+			
+		</div>
+		
+		<div style="float:right; padding-left:800px;">
+		<label value="welcome, ${sessionScope.user.username}" style="text-align:right;" />
+		</div>
+	</hbox>
+</div>

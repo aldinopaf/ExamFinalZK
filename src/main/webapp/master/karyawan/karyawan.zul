@@ -1,0 +1,39 @@
+<?page title="Karyawan" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd" ?>
+<zk>
+<window title="Karyawan" border="normal" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vmd.KaryawanVmd')">
+			
+			<hlayout>
+				<button label="add" onClick="@command('add')" />
+				<button label="edit" onClick="@command('edit')" />
+				<button label="delete" onClick="@command('delete')" />
+			</hlayout>
+			
+			<space />
+			
+			<listbox model="@load(vm.listKaryawan)" 
+							 selectedItem="@bind(vm.mstKaryawanDto)">
+					<listhead>
+						<listheader label="Id Karyawan" sort="auto" />
+						<listheader label="Employee Name" sort="auto" />
+						<listheader label="Date of Birth" sort="auto" />
+						<listheader label="Birth Place" />
+						<listheader label="Gender" sort="auto" />
+						<listheader label="Department" sort="auto" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.id)" />
+							<listcell label="@load(each.employeeName)" />
+							<listcell label="@load(each.dateOfBirth)" />
+							<listcell label="@load(each.birthPlace)" />
+							<listcell label="@load(each.gender.description)" />
+							<listcell label="@load(each.department.deptName)" />
+						</listitem>
+					</template>
+			</listbox>
+			
+</window>
+</zk>

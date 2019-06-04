@@ -1,0 +1,142 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Bil Address Edit" border="normal" 
+	apply="org.zkoss.bind.BindComposer" 
+	viewModel="@id('vm') @init('vmd.BilAddressEditVmd')">
+	
+	<hlayout>
+		<button label="back" onClick="@command('back')" />
+		<button label="save" onClick="@command('save')" />
+	</hlayout>
+	
+	<space />
+	
+	<grid>
+		<columns>
+			<column width="15%" label="" />
+			<column width="20%" label="" />
+			<column width="1%" label="" />
+			<column width="10%" label="" />
+			<column width="54%" label="" />
+		</columns>
+		
+		<rows>
+			<row>
+				<label value="ID" style="float:right;" />
+				<textbox constraint="no empty : harus diisi" 
+					value="@bind(vm.mstBilAddressDto.id)" 
+					readonly="@load(vm.readonly)" />
+				<label value="" />
+				<label value="" />
+				<label value="" />
+			</row>
+			
+			<row>
+				<label value="Nama" style="float:right;"/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.mstBilAddressDto.addressName)" />
+			</row>
+			
+			<row>
+				<label value="Gender" style="float:right;"/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.mstBilAddressDto.gender)" />
+			</row>
+			<row>
+				<label value="Job" style="float:right;"/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.mstBilAddressDto.job)" />
+			</row>
+		</rows>
+	</grid>
+	
+	<vlayout>
+		<groupbox>
+			<caption label="Detail" />
+			<separator />
+			<hbox width="100%">
+				<space />
+				<button label="add" onClick="@command('addDetail')" visible="@load(vm.visible)" />
+				<button label="delete" onClick="@command('removeDetail')" visible="@load(vm.visible)" />
+				<space />
+			</hbox>
+			
+			<separator />
+			<listbox model="@load(vm.listBilAddressDetails)" selectedItem="@bind(vm.mstBilAddressDetailDto)"  >
+				<listhead>
+					<listheader label="ID" />
+					<listheader label="Address" />
+					<listheader label="Postal Code" />
+					<listheader label="City" />
+					<listheader label="Province" />
+					<listheader label="Home Address" />
+					<listheader label="Work Address" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.detailId)" />
+						<listcell label="@load(each.address)" />
+						<listcell label="@load(each.postalCode)" />
+						<listcell label="@load(each.city)" />
+						<listcell label="@load(each.province)" />
+						<listcell label="@load(each.homeAddress)" />
+						<listcell label="@load(each.workAddress)" />
+					</listitem>
+				</template>
+			</listbox>
+			<space />
+		</groupbox>
+	</vlayout>
+	<window visible="@bind(vm.statusPopup)" width="600px" height="400px" mode="modal" 
+			contentStyle="overflow:auto" 
+			style="-webkit0box-shadow: 1px 1px 10px 3px #969696;
+						 	box-shadow: 1px 1px 10px 3px #969696" title="Add Detail" >
+			<hlayout>
+				<button label="back" onClick="@command('backDetail')" />
+				<button label="save" onClick="@command('saveDetail')" />
+			</hlayout>
+			
+			<space />
+			
+			<grid>
+				<columns>
+					<column width="30%" align="right" />
+					<column width="70%" align="right" />
+				</columns>
+				
+				<rows>
+					<row>
+						<label value="ID" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.detailId)" />
+					</row>
+					
+					<row>
+						<label value="Address" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.address)" />
+					</row>
+					
+					<row>
+						<label value="Postal Code" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.postalCode)" />
+					</row>
+					
+					<row>
+						<label value="City" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.city)" />
+					</row>
+					
+					<row>
+						<label value="Province" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.province)" />
+					</row>
+					
+					<row>
+						<label value="Home Address" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.homeAddress)" />
+					</row>			
+					<row>
+						<label value="Work Address" />
+						<textbox value="@bind(vm.mstBilAddressDetailDto.workAddress)" />
+					</row>			
+				</rows>
+			</grid>
+	</window>
+</window>
+</zk>

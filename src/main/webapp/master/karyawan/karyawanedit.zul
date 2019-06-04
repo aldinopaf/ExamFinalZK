@@ -1,0 +1,102 @@
+<?page title="Karyawan Edit" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd" ?>
+<zk>
+<window title="Karyawan Edit" border="normal" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vmd.KaryawanEditVmd')">
+	
+		<hlayout>
+			<button label="back" onClick="@command('back')" />
+			<button label="save" onClick="@command('save')" />
+		</hlayout>
+		
+		<space />
+		
+		<grid>
+			<columns>
+				<column label="" width="250px" />
+				<column label="" width="300px" />
+			</columns>
+			
+			<rows>
+				<row>
+					<label value="Id Karyawan" />
+					<textbox constraint="no empty : harus diisi" 
+						value="@load(vm.mstKaryawanDto.id) @save(vm.mstKaryawanDto.id, before='save')" 
+						readonly="@load(vm.mstKaryawanDto.id eq null ? false : true)" />
+				</row>
+				
+				<row>
+					<label value="Employee Name" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.employeeName)" />
+				</row>
+				
+				<row>
+					<label value="Jenis Kelamin" />
+					<radiogroup id="rg2"  selectedItem="@bind(vm.genderChoice)" >
+							<radio radiogroup="rg2" value="M" label="Male" />
+							<radio radiogroup="rg2" value="F" label="Female" />
+					</radiogroup>
+				</row>
+				
+				<row>
+					<label value=" Date of Birth" />
+					<datebox constraint="no empty : harus diisi" 
+							value="@bind(vm.mstKaryawanDto.dateOfBirth)" />
+				</row>
+				
+				<row>
+					<label value="Birth Place" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.birthPlace)" />
+				</row>
+				
+				<row>
+					<label value="Department" />
+					<combobox constraint="no empty : harus diisi" 
+						model="@load(vm.listDepartment)"
+						selectedItem="@save(vm.mstDepartmentDto)" 
+						value="@load(vm.mstKaryawanDto.department.deptName)" >
+						<template name="model">
+							<comboitem label="@load(each.deptName)" 
+								value="@load(each.id)"/>
+						</template>
+					</combobox>
+				</row>
+				
+				<row>
+					<label value="Province" />
+					<combobox constraint="no empty : harus diisi" 
+						model="@load(vm.listProvince)" selectedItem="@save(vm.mstProvinceDto)" 
+						value="@load(vm.mstProvinceDto.provinceName)" onSelect="@command('findCity')" >
+						<template name="model">
+							<comboitem label="@load(each.provinceName)" value="@load(each.provinceCode)" />
+						</template>
+					</combobox>
+				</row>
+				
+				<row>
+					<label value="City" />
+					<combobox constraint="no empty : harus diisi" model="@load(vm.listCity)" 
+						selectedItem="@save(vm.mstCityDto)" value="@load(vm.mstCityDto.cityName)" 
+						disabled="@load(vm.mstProvinceDto.provinceCode eq null ? true : false)">
+							<template name="model">
+									<comboitem label="@load(each.cityName)" value="@load(each.cityCode)" />
+							</template>
+					</combobox>
+				</row>
+				
+				<row>
+					<label value="Address" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.address)" />
+				</row>
+				
+				<row>
+					<label value="Postal Code" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.postalCode)" />
+				</row>
+				
+			</rows>
+		</grid>
+	
+</window>
+</zk>
